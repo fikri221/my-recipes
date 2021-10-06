@@ -95,7 +95,7 @@ dishRouter.route('/:dishId')
     })
 
     .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-        Dishes.findOneAndRemove(req.params.dishId)
+        Dishes.findByIdAndRemove(req.params.dishId)
             .then((dish) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');

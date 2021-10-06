@@ -9,7 +9,7 @@ let router = express.Router();
 router.use(bodyParser.json());
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.find({})
       .then((users) => {
         res.statusCode = 200;
@@ -59,7 +59,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
   let token = authenticate.getToken({ _id: req.user._id });
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
-  res.json({ success: true, token: token, status: 'You are successfully logged in!' });
+  res.json({ success: true, token: token, status: 'You are successfully logged in!', isAdmin: req.user.admin });
 });
 
 router.get('/logout', (req, res, next) => {
