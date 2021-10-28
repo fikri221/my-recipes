@@ -18,6 +18,7 @@ let dishRouter = require('./routes/dishRouter');
 let promoRouter = require('./routes/promoRouter');
 let leaderRouter = require('./routes/leaderRouter');
 let uploadRouter = require('./routes/uploadRouter');
+let favoriteRouter = require('./routes/favoriteRouter');
 
 // Set up connection to mongodb
 const url = config.mongoUrl;
@@ -60,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
+app.use('/favorites', favoriteRouter);
 app.use('/imageUpload', uploadRouter);
 
 // catch 404 and forward to error handler
